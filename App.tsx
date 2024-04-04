@@ -1,5 +1,5 @@
 import React from 'react';
-import {View} from 'react-native';
+import {SafeAreaView} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import StackNavigator from './src/navigation/StackNavigator';
 import {ToDoProvider} from './src/contexts/ToDoContext';
@@ -7,9 +7,11 @@ import {ToDoProvider} from './src/contexts/ToDoContext';
 function App(): React.JSX.Element {
   return (
     <ToDoProvider>
-        <NavigationContainer>
+      <NavigationContainer>
+        <SafeAreaView style={{flex: 1}}>
           <StackNavigator />
-        </NavigationContainer>
+        </SafeAreaView>
+      </NavigationContainer>
     </ToDoProvider>
   );
 }

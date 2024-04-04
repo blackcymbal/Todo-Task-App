@@ -12,9 +12,6 @@ const Home = ({navigation}) => {
     <View>
       <Text>Home</Text>
       <ToDoList />
-      <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Text>Google</Text>
-      </TouchableOpacity>
     </View>
   );
 };

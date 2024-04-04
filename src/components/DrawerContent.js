@@ -1,6 +1,4 @@
 import React from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-
 import {
   View,
   Text,
@@ -8,48 +6,20 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import {
-  Avatar,
-  List,
-  Portal,
-  Provider,
-  Button,
-  Modal,
-  Divider,
-} from 'react-native-paper';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
-import Feather from 'react-native-vector-icons/Feather';
 
-import {BASE_URL} from '../../services/apis';
-import theme from '../../themes/theme';
-import {logout} from '../../stores/actions/userActions';
+import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+
+import theme from '../assets/themes/theme';
 
 const routes = [
-  {name: 'About', path: 'StudentAbout', icon: 'person', user: 'student'},
-  {name: 'About', path: 'MentorAbout', icon: 'person', user: 'mentor'},
-
-  {
-    name: 'Apply Abroad',
-    path: 'ApplyAbroad',
-    icon: 'school',
-    user: 'student',
-  },
-  {name: 'About Us', path: 'Aboutus', icon: 'info'},
-  {name: 'Contact Us', path: 'Contactus', icon: 'contact-support'},
-  {name: 'Privacy Policy', path: 'PrivacyPolicy', icon: 'privacy-tip'},
+  {name: 'About', path: 'About', icon: 'person', user: 'student'},
+  {name: 'Home', path: 'Home', icon: 'school'},
+  {name: 'Tasks', path: 'Tasks', icon: 'info'},
   {name: 'Settings', path: 'Settings', icon: 'settings'},
 ];
 
 const DrawerContent = ({navigation}) => {
   const [visible, setVisible] = React.useState(false);
-  // const {user} = React.useContext(UserContext);
-
-  // Redux
-  const dispatch = useDispatch();
-  const {loading, error, user} = useSelector(state => state.userDetails);
-  // React.useEffect(() => {
-  //   dispatch(getUserDetails());
-  // }, [dispatch]);
 
   const showModal = () => {
     navigation.closeDrawer();
@@ -57,26 +27,18 @@ const DrawerContent = ({navigation}) => {
   };
   const hideModal = () => setVisible(false);
 
-  const handleClick = () => {
-    dispatch(logout());
-  };
+  const handleClick = () => {};
 
   return (
     <View>
       <View style={styles.drawerHeader}>
-        {user?.profilePic ? (
-          <Avatar.Image
-            size={130}
-            source={{uri: `${BASE_URL}/${user.profilePic}`}}
-          />
-        ) : (
-          <Avatar.Text
-            size={130}
-            label={user.name}
-            color={theme.colors.primary}
-            style={{backgroundColor: '#F8F8F8'}}
-          />
-        )}
+        <View
+          style={{
+            height: 20,
+            width: 20,
+            borderRadius: 20,
+            backgroundColor: 'grey',
+          }}></View>
         <Text
           style={{
             color: '#FFFF',
@@ -84,46 +46,30 @@ const DrawerContent = ({navigation}) => {
             fontWeight: 'bold',
             padding: 5,
           }}>
-          {user.name}
+          {'Shohan'}
         </Text>
-        <Text style={{color: '#FFFF', fontSize: 14}}>
-          {JSON.parse(user.phone).dialCode + JSON.parse(user.phone).phoneNumber}
-        </Text>
+        <Text style={{color: '#FFFF', fontSize: 14}}>{'01878044600'}</Text>
       </View>
 
-      <ScrollView>
+      <ScrollView style={{paddingHorizontal: 10}} >
         {routes.map(
           (route, idx) =>
-            (route.user === user.userStatus || !route.user) && (
+            !route.user && (
               <TouchableOpacity
                 key={idx}
-                onPress={() => navigation.navigate(route.path)}>
-                <List.Item
-                  title={route.name}
-                  left={props => (
-                    <MaterialIcon {...props} size={30} name={route.icon} />
-                  )}
-                />
+                onPress={() => navigation.navigate(route.path)}
+                style={styles.button}
+                >
+                <MaterialIcon size={30} name={route.icon} />
+                <Text style={{marginLeft: 20}}>{route.name}</Text>
               </TouchableOpacity>
             ),
         )}
-        <Divider style={styles.divider} />
-        <List.Item
-          onPress={showModal}
-          title="Logout"
-          left={props => <MaterialIcon {...props} size={30} name="logout" />}
-        />
-        <TouchableOpacity onPress={() => navigation.navigate('DeleteAccount')}>
-          <List.Item
-            title={'Delete Account'}
-            left={props => (
-              <Feather {...props} size={30} name={'minus-circle'} />
-            )}
-          />
-        </TouchableOpacity>
+        <View style={{width: 100, height: 1, backgroundColor: '#000'}}></View>
+       
       </ScrollView>
 
-      <Portal>
+      {/* <Portal>
         <Modal
           visible={visible}
           onDismiss={hideModal}
@@ -147,7 +93,7 @@ const DrawerContent = ({navigation}) => {
             </Button>
           </View>
         </Modal>
-      </Portal>
+      </Portal> */}
     </View>
   );
 };
@@ -161,18 +107,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  modal: {
-    alignItems: 'center',
-    backgroundColor: '#FFF',
-    marginLeft: 30,
-    marginRight: 30,
-    padding: 30,
-  },
   divider: {
     marginTop: 20,
     marginBottom: 20,
     height: 1,
   },
+  button: {flexDirection: 'row', alignItems: 'center', marginVertical: 20}
+
 });
 
 export default DrawerContent;
