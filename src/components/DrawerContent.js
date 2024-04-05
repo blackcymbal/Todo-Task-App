@@ -4,17 +4,16 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
 } from 'react-native';
 
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import Feather from 'react-native-vector-icons/Feather';
 
 import theme from '../assets/themes/theme';
 
 const routes = [
-  {name: 'About', path: 'About', icon: 'person', user: 'student'},
-  {name: 'Home', path: 'Home', icon: 'school'},
-  {name: 'Tasks', path: 'Tasks', icon: 'info'},
+  {name: 'About', path: 'About', icon: 'home', user: 'student'},
+  {name: 'Home', path: 'Home', icon: 'home'},
+  {name: 'Tasks', path: 'Tasks', icon: 'list'},
   {name: 'Settings', path: 'Settings', icon: 'settings'},
 ];
 
@@ -51,7 +50,7 @@ const DrawerContent = ({navigation}) => {
         <Text style={{color: '#FFFF', fontSize: 14}}>{'01878044600'}</Text>
       </View>
 
-      <ScrollView style={{paddingHorizontal: 10}} >
+      <View style={{paddingHorizontal: 10}} >
         {routes.map(
           (route, idx) =>
             !route.user && (
@@ -60,14 +59,12 @@ const DrawerContent = ({navigation}) => {
                 onPress={() => navigation.navigate(route.path)}
                 style={styles.button}
                 >
-                <MaterialIcon size={30} name={route.icon} />
+                <Feather size={30} name={route.icon} />
                 <Text style={{marginLeft: 20}}>{route.name}</Text>
               </TouchableOpacity>
             ),
-        )}
-        <View style={{width: 100, height: 1, backgroundColor: '#000'}}></View>
-       
-      </ScrollView>
+        )}       
+      </View>
 
       {/* <Portal>
         <Modal
