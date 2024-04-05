@@ -1,25 +1,20 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import theme from '../assets/themes/theme';
+import SocialLogin from '../components/SocialLogin';
 
 
 
 const LoginScreen = ({navigation}) => {
 
-  const handleLogin=()=>{
-    navigation.navigate('DrawerNavigator')
-  }
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
         <Text style={styles.welcomeText}>Welcome to Todo Task App</Text>
       </View>
       <View style={{flex: 1, alignItems: 'center'}}>
-        <Text>Login With</Text>
-        <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <FontAwesome name="google" size={25} color={'red'} />
-          <Text style={{paddingLeft: 5}}>Google</Text>
-        </TouchableOpacity>
+        <Text style={{fontSize: 16}}>Continue With</Text>
+        <SocialLogin />
       </View>
     </View>
   );
@@ -33,17 +28,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
+    backgroundColor: theme.colors.mintCream
   },
   buttonContainer: {flex: 1, alignItems: 'center', justifyContent: 'center'},
-  button: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#DDDDDD',
-    padding: 10,
-    width: 200,
-    borderRadius: 10,
-    marginVertical: 4,
-  },
-  welcomeText: {fontSize: 22, fontWeight: '600'},
+  welcomeText: {fontSize: 22, fontWeight: '700', color: theme.colors.primary},
 });

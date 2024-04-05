@@ -1,8 +1,9 @@
 const theme = {
   colors: {
-    primary: '#1D660E',
-    secondary: '#081D0C',
+    primary: '#1A7C66',
+    secondary: '#2CE8BE',
     tertiary: '#6A9A70',
+    mintCream: '#F8FFF9',
     font: '#606060',
     font2: '#6EC55A',
     font3: '#414141',
