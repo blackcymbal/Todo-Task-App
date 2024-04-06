@@ -1,9 +1,39 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const SocialLogin = () => {
   const navigation = useNavigation();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId:
+        '780722487644-0neddhm6ifkrnsp53vrn0s35mk7jr816.apps.googleusercontent.com',
+    });
+  }, []);
+
+  async function onGoogleButtonPress() {
+    try {
+      // Check if your device supports Google Play
+      await GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true});
+      // Get the users ID token
+      const {idToken, user} = await GoogleSignin.signIn();
+
+      console.log(user);
+
+      // Create a Google credential with the token
+      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+
+      console.log(googleCredential)
+
+      // Sign-in the user with the credential
+      return auth().signInWithCredential(googleCredential);
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const googleAlphabets = [
     {alphabet: 'G', color: '#0086F9'},
@@ -15,7 +45,8 @@ const SocialLogin = () => {
   ];
 
   const handleLogin = () => {
-    navigation.navigate('DrawerNavigator');
+    onGoogleButtonPress();
+    // navigation.navigate('DrawerNavigator');
   };
 
   return (
