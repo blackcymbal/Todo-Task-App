@@ -5,6 +5,7 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Image,
+  Platform
 } from 'react-native';
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -54,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingBottom: 10,
     paddingHorizontal: 10,
+    paddingTop: Platform.OS == 'ios' ? 0 : 10 
   },
   title: {fontSize: 20, fontWeight: '500', color: theme.colors.mintCream},
   image: {height: 30, width: 30, borderRadius: 30},
