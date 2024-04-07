@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 
 const ToDoList = () => {
   const {toDos, removeToDo} = useContext(ToDoContext);
+  const [done, setDone] = useState(false);
 
   const renderItem = ({item}) => (
     <View style={styles.eachTask}>
@@ -20,12 +21,25 @@ const ToDoList = () => {
         <Text style={styles.title}>{item.name}</Text>
         <Text style={styles.date}>{item.data}</Text>
       </View>
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => removeToDo(item.id)}>
-        <AntDesign size={25} name={'delete'} color={'#A00000'} />
-      </TouchableOpacity>
+      <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity
+          onPress={() => setDone(!done)}
+          style={[
+            styles.button2,
+            {backgroundColor: done ? '#48BB78' : theme.colors.mintCream},
+          ]}>
+          <AntDesign
+            size={25}
+            name={'check'}
+            color={done ? theme.colors.mintCream : '#48BB78'}
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => removeToDo(item.id)}>
+          <AntDesign size={25} name={'delete'} color={'#A00000'} />
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -74,6 +88,17 @@ const styles = StyleSheet.create({
     borderColor: '#A00000',
     alignItems: 'center',
     justifyContent: 'center',
+    marginLeft: 5,
+  },
+  button2: {
+    height: 40,
+    width: 40,
+    borderRadius: 5,
+    borderWidth: 1.5,
+    borderColor: '#48BB78',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: 5,
   },
   totalView: {
     flexDirection: 'row',
