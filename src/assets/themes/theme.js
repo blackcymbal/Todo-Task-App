@@ -5,9 +5,7 @@ const theme = {
     tertiary: '#6A9A70',
     mintCream: '#F8FFF9',
     font: '#606060',
-    font2: '#6EC55A',
-    font3: '#414141',
-    font4: '#30871F',
+    font2: '#414141',
     accent: 'yellow',
   },
 };

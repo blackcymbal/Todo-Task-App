@@ -26,7 +26,7 @@ const SocialLogin = () => {
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
-      console.log(googleCredential)
+      console.log(googleCredential);
 
       // Sign-in the user with the credential
       return auth().signInWithCredential(googleCredential);
@@ -45,8 +45,8 @@ const SocialLogin = () => {
   ];
 
   const handleLogin = () => {
-    onGoogleButtonPress();
-    // navigation.navigate('DrawerNavigator');
+    // onGoogleButtonPress();
+    navigation.navigate('DrawerNavigator');
   };
 
   return (

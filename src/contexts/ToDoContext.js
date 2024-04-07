@@ -5,11 +5,22 @@ const ToDoContext = createContext();
 const ToDoProvider = ({children}) => {
   const [toDos, setToDos] = useState([]);
 
-  const addToDo = text => {
-    setToDos([...toDos, {id: toDos.length + 1, text}]);
+  const currentDate = new Date();
+  const currentTimeSeconds = Math.floor(currentDate.getTime() / 1000);
+  const formattedDate = currentDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: '2-digit',
+  });
+
+  const addToDo = task => {
+    setToDos([
+      ...toDos,
+      {id: currentTimeSeconds, data: formattedDate, ...task},
+    ]);
   };
 
-  console.log(toDos)
+  console.log(toDos);
 
   const removeToDo = id => {
     setToDos(toDos.filter(toDo => toDo.id !== id));
