@@ -12,8 +12,8 @@ const LoginScreen = ({navigation}) => {
       <View style={styles.buttonContainer}>
         <Text style={styles.welcomeText}>Welcome to Todo Task App</Text>
       </View>
-      <View style={{flex: 1, alignItems: 'center'}}>
-        <Text style={{fontSize: 16}}>Continue With</Text>
+      <View style={styles.buttonContainer}>
+        <Text style={styles.loginText}>Continue With</Text>
         <SocialLogin />
       </View>
     </View>
@@ -28,8 +28,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: 10,
+    paddingTop: 150,
+    paddingBottom: 100,
     backgroundColor: theme.colors.mintCream
   },
-  buttonContainer: {flex: 1, alignItems: 'center', justifyContent: 'center'},
+  buttonContainer: {flex: 1, alignItems: 'center'},
   welcomeText: {fontSize: 22, fontWeight: '700', color: theme.colors.primary},
+  loginText: {fontSize: 16, color: theme.colors.font}
 });

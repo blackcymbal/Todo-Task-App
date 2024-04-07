@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SocialLogin = () => {
   const navigation = useNavigation();
@@ -23,10 +24,15 @@ const SocialLogin = () => {
 
       console.log(user);
 
+      try {
+        const jsonValue = JSON.stringify(user);
+        await AsyncStorage.setItem('userInfo', jsonValue);
+      } catch (e) {
+        // saving error
+      }
+
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
-
-      console.log(googleCredential);
 
       // Sign-in the user with the credential
       return auth().signInWithCredential(googleCredential);
@@ -44,8 +50,8 @@ const SocialLogin = () => {
     {alphabet: 'e', color: '#FF4131'},
   ];
 
-  const handleLogin = () => {
-    // onGoogleButtonPress();
+  const handleLogin = async () => {
+    await onGoogleButtonPress();
     navigation.navigate('DrawerNavigator');
   };
 

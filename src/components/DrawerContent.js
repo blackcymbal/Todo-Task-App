@@ -18,15 +18,7 @@ const routes = [
 ];
 
 const DrawerContent = ({navigation}) => {
-  const [visible, setVisible] = React.useState(false);
 
-  const showModal = () => {
-    navigation.closeDrawer();
-    setVisible(true);
-  };
-  const hideModal = () => setVisible(false);
-
-  const handleClick = () => {};
 
   return (
     <View>
@@ -59,8 +51,8 @@ const DrawerContent = ({navigation}) => {
                 onPress={() => navigation.navigate(route.path)}
                 style={styles.button}
                 >
-                <Feather size={30} name={route.icon} />
-                <Text style={{marginLeft: 20}}>{route.name}</Text>
+                <Feather size={30} name={route.icon} color={theme.colors.font} />
+                <Text style={{marginLeft: 20, color: theme.colors.font, fontSize: 16, fontWeight: '500'}}>{route.name}</Text>
               </TouchableOpacity>
             ),
         )}       

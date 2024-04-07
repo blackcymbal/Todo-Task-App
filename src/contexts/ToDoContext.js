@@ -4,6 +4,7 @@ const ToDoContext = createContext();
 
 const ToDoProvider = ({children}) => {
   const [toDos, setToDos] = useState([]);
+  const [user, setUser] = useState(null)
 
   const currentDate = new Date();
   const currentTimeSeconds = Math.floor(currentDate.getTime() / 1000);
@@ -27,7 +28,7 @@ const ToDoProvider = ({children}) => {
   };
 
   return (
-    <ToDoContext.Provider value={{toDos, addToDo, removeToDo}}>
+    <ToDoContext.Provider value={{toDos, addToDo, removeToDo, user, setUser}}>
       {children}
     </ToDoContext.Provider>
   );
