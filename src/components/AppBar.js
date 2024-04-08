@@ -20,7 +20,6 @@ const AppBar = ({title}) => {
   const {user} = useContext(ToDoContext);
   const [showModal, setShowModal] = useState(false);
 
-  console.log('????????????', user);
 
   const handleDrawer = () => {
     navigation.openDrawer();

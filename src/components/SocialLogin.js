@@ -1,12 +1,14 @@
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {ToDoContext} from '../contexts/ToDoContext';
 
 const SocialLogin = () => {
   const navigation = useNavigation();
+  const {setUser} = useContext(ToDoContext);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -22,7 +24,7 @@ const SocialLogin = () => {
       // Get the users ID token
       const {idToken, user} = await GoogleSignin.signIn();
 
-      console.log(user);
+      setUser(user);
 
       try {
         const jsonValue = JSON.stringify(user);
@@ -30,14 +32,14 @@ const SocialLogin = () => {
       } catch (e) {
         // saving error
       }
-
+      navigation.navigate('DrawerNavigator');
       // Create a Google credential with the token
       const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
       // Sign-in the user with the credential
       return auth().signInWithCredential(googleCredential);
     } catch (error) {
-      console.log(error);
+      alert(error);
     }
   }
 
@@ -52,7 +54,6 @@ const SocialLogin = () => {
 
   const handleLogin = async () => {
     await onGoogleButtonPress();
-    navigation.navigate('DrawerNavigator');
   };
 
   return (

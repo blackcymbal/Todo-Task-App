@@ -1,14 +1,8 @@
 import React from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from 'react-native';
-
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
-
 import theme from '../assets/themes/theme';
+import UserProfile from './UserProfile';
 
 const routes = [
   {name: 'About', path: 'About', icon: 'home', user: 'student'},
@@ -18,76 +12,44 @@ const routes = [
 ];
 
 const DrawerContent = ({navigation}) => {
-
-
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.drawerHeader}>
-        <View
-          style={{
-            height: 20,
-            width: 20,
-            borderRadius: 20,
-            backgroundColor: 'grey',
-          }}></View>
-        <Text
-          style={{
-            color: '#FFFF',
-            fontSize: 20,
-            fontWeight: 'bold',
-            padding: 5,
-          }}>
-          {'Shohan'}
-        </Text>
-        <Text style={{color: '#FFFF', fontSize: 14}}>{'01878044600'}</Text>
+        <UserProfile textColor={theme.colors.mintCream} />
       </View>
 
-      <View style={{paddingHorizontal: 10}} >
+      <View style={{paddingHorizontal: 10, paddingLeft: 20}}>
         {routes.map(
           (route, idx) =>
             !route.user && (
               <TouchableOpacity
                 key={idx}
                 onPress={() => navigation.navigate(route.path)}
-                style={styles.button}
-                >
-                <Feather size={30} name={route.icon} color={theme.colors.font} />
-                <Text style={{marginLeft: 20, color: theme.colors.font, fontSize: 16, fontWeight: '500'}}>{route.name}</Text>
+                style={styles.button}>
+                <Feather
+                  size={30}
+                  name={route.icon}
+                  color={theme.colors.font}
+                />
+                <Text
+                  style={{
+                    marginLeft: 20,
+                    color: theme.colors.font,
+                    fontSize: 16,
+                    fontWeight: '500',
+                  }}>
+                  {route.name}
+                </Text>
               </TouchableOpacity>
             ),
-        )}       
+        )}
       </View>
-
-      {/* <Portal>
-        <Modal
-          visible={visible}
-          onDismiss={hideModal}
-          contentContainerStyle={styles.modal}>
-          <Text style={{fontSize: 22, paddingBottom: 10}}>Are you sure ? </Text>
-          <Text style={{textAlign: 'justify', paddingBottom: 20}}>
-            Are you sure you want to log out from this account. You have to
-            login again to use your account.
-          </Text>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-around',
-              width: '100%',
-            }}>
-            <Button mode="outlined" onPress={hideModal}>
-              Cancel
-            </Button>
-            <Button mode="contained" onPress={handleClick}>
-              Yes, Logout
-            </Button>
-          </View>
-        </Modal>
-      </Portal> */}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  container: {},
   drawerHeader: {
     backgroundColor: theme.colors.primary,
     margin: 0,
@@ -101,8 +63,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     height: 1,
   },
-  button: {flexDirection: 'row', alignItems: 'center', marginVertical: 20}
-
+  button: {flexDirection: 'row', alignItems: 'center', marginVertical: 20},
 });
 
 export default DrawerContent;

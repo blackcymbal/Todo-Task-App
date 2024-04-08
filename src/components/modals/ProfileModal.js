@@ -1,16 +1,14 @@
 import {
   StyleSheet,
-  Text,
   View,
   Modal,
   TouchableWithoutFeedback,
   Dimensions,
-  TextInput,
-  TouchableOpacity,
 } from 'react-native';
-
 import React from 'react';
 import theme from '../../assets/themes/theme';
+import UserProfile from '../UserProfile';
+import LogoutButton from '../LogoutButton';
 
 const ProfileModal = ({showModal, setShowModal}) => {
   return (
@@ -22,12 +20,10 @@ const ProfileModal = ({showModal, setShowModal}) => {
       <TouchableWithoutFeedback onPress={() => setShowModal(false)}>
         <View style={styles.container}>
           <TouchableWithoutFeedback onPress={() => false}>
-            <View
-              style={{
-                backgroundColor: theme.colors.mintCream,
-                height: Dimensions.get('screen').height,
-                width: Dimensions.get('screen').width*0.7,
-              }}></View>
+            <View style={styles.inContainer}>
+                <UserProfile />
+              <LogoutButton />
+            </View>
           </TouchableWithoutFeedback>
         </View>
       </TouchableWithoutFeedback>
@@ -43,5 +39,14 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.35)',
+  },
+  inContainer: {
+    backgroundColor: theme.colors.mintCream,
+    height: Dimensions.get('screen').height,
+    width: Dimensions.get('screen').width * 0.7,
+    paddingHorizontal: 15,
+    paddingVertical: 100,
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
 });

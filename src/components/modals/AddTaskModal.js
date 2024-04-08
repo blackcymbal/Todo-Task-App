@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import React, {useState, useContext} from 'react';
 import theme from '../../assets/themes/theme';
-import { ToDoContext } from '../../contexts/ToDoContext';
+import {ToDoContext} from '../../contexts/ToDoContext';
 
 const AddTaskModal = ({showModal, setShowModal}) => {
   const [title, setTitle] = useState('');
@@ -19,10 +19,12 @@ const AddTaskModal = ({showModal, setShowModal}) => {
   const {addToDo} = useContext(ToDoContext);
 
   const handleAddToDo = () => {
-    addToDo({name: title, description: description});
-    setTitle('');
-    setDescription('');
-    setShowModal(false)
+    if (title.length != 0) {
+      addToDo({name: title, description: description});
+      setTitle('');
+      setDescription('');
+      setShowModal(false);
+    }
   };
 
   return (
@@ -57,10 +59,7 @@ const AddTaskModal = ({showModal, setShowModal}) => {
                   onChangeText={setDescription}
                 />
               </View>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={handleAddToDo}
-              >
+              <TouchableOpacity style={styles.button} onPress={handleAddToDo}>
                 <Text style={styles.buttonText}>Create</Text>
               </TouchableOpacity>
             </View>

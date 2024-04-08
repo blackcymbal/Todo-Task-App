@@ -1,16 +1,12 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useContext} from 'react';
-import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
+import React from 'react';
 import AppBar from '../components/AppBar';
 import theme from '../assets/themes/theme';
 import firestore from '@react-native-firebase/firestore';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { ToDoContext } from '../contexts/ToDoContext';
 import UserProfile from '../components/UserProfile';
+import LogoutButton from '../components/LogoutButton';
 
-
-const SettingsScreen = ({navigation}) => {
-  const {setUser} = useContext(ToDoContext);
+const SettingsScreen = () => {
   let userId = '104063193449254549032';
 
   const todosRef = firestore().collection(`${userId}`);
@@ -54,31 +50,12 @@ const SettingsScreen = ({navigation}) => {
       });
   };
 
-  const handleLogout = async () => {
-    //updateData()
-    //getTodos();
-    //storeData()
-    //getData();
-
-
-    try {
-      await AsyncStorage.removeItem('userInfo')
-    } catch(e) {
-      // remove error
-    }
-  
-    navigation.navigate('LoginScreen');
-  };
-
   return (
     <View style={styles.container}>
       <AppBar title={'Settings'} />
       <View style={styles.insideContainer}>
         <UserProfile />
-        <TouchableOpacity style={styles.button} onPress={handleLogout}>
-          <MaterialIcon size={30} name="logout" />
-          <Text style={{marginLeft: 20}}>Logout</Text>
-        </TouchableOpacity>
+        <LogoutButton />
       </View>
     </View>
   );
@@ -94,7 +71,7 @@ const styles = StyleSheet.create({
   insideContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
+    paddingVertical: 70,
   },
-  button: {flexDirection: 'row', alignItems: 'center', marginVertical: 20},
 });

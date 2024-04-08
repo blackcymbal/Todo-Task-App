@@ -1,10 +1,17 @@
 import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import AppBar from '../components/AppBar';
 import ToDoList from '../components/ToDoList';
 import theme from '../assets/themes/theme';
+import { ToDoContext } from '../contexts/ToDoContext';
 
 const Home = ({navigation}) => {
+  const {getTodosFromFireStore} = useContext(ToDoContext);
+
+  useEffect(()=>{
+    getTodosFromFireStore()
+  }, [])
+
   return (
     <View style={styles.container}>
       <AppBar title={'Home'} />

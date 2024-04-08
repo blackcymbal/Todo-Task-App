@@ -34,7 +34,8 @@ const styles = StyleSheet.create({
     width: Dimensions.get('screen').width,
     alignItems: 'center',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingBottom: 5,
+    paddingTop: 10,
   },
   button: {
     flexDirection: 'row',
