@@ -10,12 +10,6 @@ const SocialLogin = () => {
   const navigation = useNavigation();
   const {setUser} = useContext(ToDoContext);
 
-  useEffect(() => {
-    GoogleSignin.configure({
-      webClientId:
-        '780722487644-0neddhm6ifkrnsp53vrn0s35mk7jr816.apps.googleusercontent.com',
-    });
-  }, []);
 
   async function onGoogleButtonPress() {
     try {

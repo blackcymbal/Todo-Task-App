@@ -33,6 +33,7 @@ const TaskDetailsModal = ({showModal, setShowModal, data}) => {
                 <Text style={styles.subTitle}>Task Description:</Text>
                 <Text style={styles.description}>{data?.description}</Text>
                 <Text style={styles.subTitle}>Created At: {data?.date}</Text>
+                <Text style={styles.subTitle}>Status: {data?.doneStatus ? 'Completed': 'Not Completed'}</Text>
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -64,13 +65,13 @@ const styles = StyleSheet.create({
     color: theme.colors.font,
     fontSize: 18,
     fontWeight: '400',
-    marginTop: 20,
+    marginTop: 10,
   },
   description: {
     color: theme.colors.font,
     fontSize: 15,
     fontWeight: '400',
-    marginTop: 5,
+    marginTop: 2,
 
   }
 });

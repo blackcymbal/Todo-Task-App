@@ -1,4 +1,4 @@
-import {StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity} from 'react-native';
 import React, {useContext} from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
@@ -15,10 +15,7 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     try {
       await auth().signOut();
-      if(Platform.OS == 'android'){
-        await GoogleSignin.signOut();
-      }
-      
+      await GoogleSignin.signOut();
       await AsyncStorage.removeItem('userInfo');
       resetToDos();
       navigation.navigate('LoginScreen');

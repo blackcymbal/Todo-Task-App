@@ -1,4 +1,4 @@
-import {View, StyleSheet, Platform} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {useContext, useEffect, useState} from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 import LoginScreen from '../screens/LoginScreen';
@@ -17,12 +17,10 @@ function StackNavigator() {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
-    if (Platform.OS == 'android') {
-      GoogleSignin.configure({
-        webClientId:
-          '780722487644-0neddhm6ifkrnsp53vrn0s35mk7jr816.apps.googleusercontent.com',
-      });
-    }
+    GoogleSignin.configure({
+      webClientId:
+        '780722487644-0neddhm6ifkrnsp53vrn0s35mk7jr816.apps.googleusercontent.com',
+    });
   }, []);
 
   const getData = async () => {
@@ -34,10 +32,10 @@ function StackNavigator() {
         setUser(JSON.parse(jsonValue));
       }
 
-      const googleCredential = auth.GoogleAuthProvider.credential(idToken);
+      // const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       setLoading(false);
 
-      return auth().signInWithCredential(googleCredential);
+      // return auth().signInWithCredential(googleCredential);
     } catch (e) {
       console.log(e);
     }
