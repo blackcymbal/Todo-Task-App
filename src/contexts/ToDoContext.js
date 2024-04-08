@@ -58,12 +58,33 @@ const ToDoProvider = ({children}) => {
         ...updatedProperties,
       };
     });
-
     setToDos(updatedTodos);
+
+    // Update in firebase
+    todosRef
+    .doc(`${id}`)
+    .update(updatedProperties)
+    .then(() => {
+      console.log('Document updated successfully');
+    })
+    .catch(error => {
+      console.error('Error updating document: ', error);
+    });
+
   };
 
   const removeToDo = id => {
     setToDos(toDos.filter(toDo => toDo.id !== id));
+    // Delete from firestore
+    todosRef
+    .doc(`${id}`) 
+    .delete()
+    .then(() => {
+      console.log('Document deleted successfully');
+    })
+    .catch(error => {
+      console.error('Error deleting document: ', error);
+    });
   };
 
   const resetToDos = () => {
