@@ -3,14 +3,21 @@ import React, {useContext, useEffect} from 'react';
 import AppBar from '../components/AppBar';
 import ToDoList from '../components/ToDoList';
 import theme from '../assets/themes/theme';
-import { ToDoContext } from '../contexts/ToDoContext';
+import {ToDoContext} from '../contexts/ToDoContext';
+import {useFocusEffect} from '@react-navigation/native';
 
 const Home = ({navigation}) => {
   const {getTodosFromFireStore} = useContext(ToDoContext);
 
-  useEffect(()=>{
-    getTodosFromFireStore()
-  }, [])
+  // useEffect(()=>{
+  //   getTodosFromFireStore()
+  // }, [])
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getTodosFromFireStore();
+    }, []),
+  );
 
   return (
     <View style={styles.container}>

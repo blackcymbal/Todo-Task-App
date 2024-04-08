@@ -4,15 +4,20 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import {ToDoContext} from '../contexts/ToDoContext';
 import theme from '../assets/themes/theme';
 
-const EachTodo = ({item}) => {
+const EachTodo = ({item, setData, setModalOpen}) => {
   const {toDos, updateTodo, setCountDone, removeToDo} = useContext(ToDoContext);
 
   useEffect(() => {
     setCountDone(toDos.filter(item => item.doneStatus === true).length);
   }, [item?.doneStatus]);
 
+  const handlePress = () => {
+    setData(item);
+    setModalOpen(true);
+  };
+
   return (
-    <View style={styles.eachTask}>
+    <TouchableOpacity style={styles.eachTask} onPress={handlePress}>
       <View>
         <Text style={styles.title}>{item.name}</Text>
         <Text style={styles.date}>{item.date}</Text>
@@ -42,7 +47,7 @@ const EachTodo = ({item}) => {
           <AntDesign size={25} name={'delete'} color={'#A00000'} />
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

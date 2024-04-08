@@ -8,8 +8,6 @@ const ToDoProvider = ({children}) => {
   const [user, setUser] = useState(null);
   const [countDone, setCountDone] = useState(0);
 
-  console.log(toDos);
-
   const todosRef = firestore().collection(`${user?.id}`);
 
   const currentDate = new Date();
@@ -26,19 +24,17 @@ const ToDoProvider = ({children}) => {
       {id: currentTimeSeconds, doneStatus: false, date: formattedDate, ...task},
     ]);
 
-    todosRef
-      .doc(`${currentTimeSeconds}`)
-      .set({
-        id: currentTimeSeconds,
-        doneStatus: false,
-        date: formattedDate,
-        ...task,
-      });
+    todosRef.doc(`${currentTimeSeconds}`).set({
+      id: currentTimeSeconds,
+      doneStatus: false,
+      date: formattedDate,
+      ...task,
+    });
   };
 
   const getTodosFromFireStore = () => {
     firestore()
-      .collection(`${user?.id}`) // Replace 'yourCollection' with the name of your collection
+      .collection(`${user?.id}`)
       .onSnapshot(querySnapshot => {
         const documents = [];
         querySnapshot.forEach(doc => {
@@ -62,33 +58,34 @@ const ToDoProvider = ({children}) => {
 
     // Update in firebase
     todosRef
-    .doc(`${id}`)
-    .update(updatedProperties)
-    .then(() => {
-      console.log('Document updated successfully');
-    })
-    .catch(error => {
-      console.error('Error updating document: ', error);
-    });
-
+      .doc(`${id}`)
+      .update(updatedProperties)
+      .then(() => {
+        console.log('Document updated successfully');
+      })
+      .catch(error => {
+        console.error('Error updating document: ', error);
+      });
   };
 
   const removeToDo = id => {
     setToDos(toDos.filter(toDo => toDo.id !== id));
     // Delete from firestore
     todosRef
-    .doc(`${id}`) 
-    .delete()
-    .then(() => {
-      console.log('Document deleted successfully');
-    })
-    .catch(error => {
-      console.error('Error deleting document: ', error);
-    });
+      .doc(`${id}`)
+      .delete()
+      .then(() => {
+        console.log('Document deleted successfully');
+      })
+      .catch(error => {
+        console.error('Error deleting document: ', error);
+      });
   };
 
   const resetToDos = () => {
     setToDos([]);
+    setCountDone(0);
+    setUser(null);
   };
 
   return (
@@ -103,7 +100,7 @@ const ToDoProvider = ({children}) => {
         setCountDone,
         user,
         setUser,
-        getTodosFromFireStore
+        getTodosFromFireStore,
       }}>
       {children}
     </ToDoContext.Provider>

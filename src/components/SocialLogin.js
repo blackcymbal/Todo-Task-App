@@ -29,6 +29,7 @@ const SocialLogin = () => {
       try {
         const jsonValue = JSON.stringify(user);
         await AsyncStorage.setItem('userInfo', jsonValue);
+        await AsyncStorage.setItem('idToken', idToken);
       } catch (e) {
         // saving error
       }

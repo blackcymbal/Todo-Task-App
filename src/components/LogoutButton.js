@@ -1,28 +1,31 @@
-import {StyleSheet, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, Platform} from 'react-native';
 import React, {useContext} from 'react';
 import MaterialIcon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import theme from '../assets/themes/theme';
 import {ToDoContext} from '../contexts/ToDoContext';
+import auth from '@react-native-firebase/auth';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const LogoutButton = () => {
   const navigation = useNavigation();
   const {resetToDos} = useContext(ToDoContext);
 
   const handleLogout = async () => {
-    //updateData()
-    //getTodos();
-    //storeData()
-    //getData();
-
     try {
+      await auth().signOut();
+      if(Platform.OS == 'android'){
+        await GoogleSignin.signOut();
+      }
+      
       await AsyncStorage.removeItem('userInfo');
+      resetToDos();
+      navigation.navigate('LoginScreen');
     } catch (e) {
       // remove error
+      alert(e);
     }
-    resetToDos();
-    navigation.navigate('LoginScreen');
   };
 
   return (

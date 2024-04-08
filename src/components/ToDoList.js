@@ -1,15 +1,18 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {View, Text, FlatList, StyleSheet} from 'react-native';
 import {ToDoContext} from '../contexts/ToDoContext';
 import theme from '../assets/themes/theme';
 import EachTodo from './EachTodo';
+import TaskDetailsModal from './modals/TaskDetailsModal';
 
 const ToDoList = () => {
   const {toDos, updateTodo, countDone, removeToDo} = useContext(ToDoContext);
-  
-  const renderItem =({item}) => (
-    <EachTodo item={item} />
-  )
+  const [data, setData] = useState({});
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const renderItem = ({item}) => (
+    <EachTodo item={item} setData={setData} setModalOpen={setModalOpen} />
+  );
   return (
     <View style={styles.container}>
       <View style={styles.totalView}>
@@ -20,6 +23,11 @@ const ToDoList = () => {
         data={toDos}
         renderItem={renderItem}
         keyExtractor={item => item.id.toString()}
+      />
+      <TaskDetailsModal
+        showModal={modalOpen}
+        setShowModal={setModalOpen}
+        data={data}
       />
     </View>
   );
