@@ -1,21 +1,30 @@
 import {StyleSheet, View} from 'react-native';
-import React, {useContext} from 'react';
+import React, {useContext, useEffect} from 'react';
 import AppBar from '../components/AppBar';
 import ToDoList from '../components/ToDoList';
 import theme from '../assets/themes/theme';
 import {ToDoContext} from '../contexts/ToDoContext';
 import {useFocusEffect} from '@react-navigation/native';
+import firestore from '@react-native-firebase/firestore';
 
 const Home = () => {
-  const {getTodosFromFireStore} = useContext(ToDoContext);
-
-
+  const {getTodosFromFireStore, user} = useContext(ToDoContext);
 
   useFocusEffect(
     React.useCallback(() => {
-      getTodosFromFireStore();
+      const unsubscribe = getTodosFromFireStore();
+
+      return () => {
+        unsubscribe();
+      };
     }, []),
   );
+
+  // useEffect(() => {
+  //   return () => {
+  //     firestore().collection(`${user?.id}`).unsubscribe();
+  //   };
+  // }, []);
 
   return (
     <View style={styles.container}>

@@ -33,7 +33,7 @@ const ToDoProvider = ({children}) => {
   };
 
   const getTodosFromFireStore = () => {
-    firestore()
+    return firestore()
       .collection(`${user?.id}`)
       .onSnapshot(querySnapshot => {
         const documents = [];
