@@ -7,12 +7,11 @@ import {ToDoContext} from '../contexts/ToDoContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Loader from '../components/Loader';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import auth from '@react-native-firebase/auth';
 
 const Stack = createStackNavigator();
 
 function StackNavigator() {
-  const {setUser, user} = useContext(ToDoContext);
+  const {setUser} = useContext(ToDoContext);
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
 
@@ -26,16 +25,12 @@ function StackNavigator() {
   const getData = async () => {
     try {
       const jsonValue = await AsyncStorage.getItem('userInfo');
-      const idToken = await AsyncStorage.getItem('idToken');
       if (jsonValue != null) {
         setLoggedIn(true);
         setUser(JSON.parse(jsonValue));
       }
 
-      // const googleCredential = auth.GoogleAuthProvider.credential(idToken);
       setLoading(false);
-
-      // return auth().signInWithCredential(googleCredential);
     } catch (e) {
       console.log(e);
     }

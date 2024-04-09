@@ -1,5 +1,5 @@
 import {StyleSheet, Text, View, Image} from 'react-native';
-import React, {useContext, useState} from 'react';
+import React, {useContext} from 'react';
 import {ToDoContext} from '../contexts/ToDoContext';
 
 const UserProfile = ({textColor = '#000'}) => {

@@ -38,11 +38,7 @@ const AddTaskModal = ({showModal, setShowModal}) => {
           <TouchableWithoutFeedback onPress={() => false}>
             <View style={styles.innerContainer}>
               <Text style={styles.title}>Add A New Task</Text>
-              <View
-                style={{
-                  width: Dimensions.get('screen').width * 0.85,
-                  paddingHorizontal: 10,
-                }}>
+              <View style={styles.taskContsiner}>
                 <Text style={styles.subTitle}>Task Title</Text>
                 <TextInput
                   style={styles.textInput1}
@@ -80,12 +76,15 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.35)',
   },
   innerContainer: {
-    //  height: Dimensions.get('screen').height * 0.6,
     width: Dimensions.get('screen').width * 0.85,
     backgroundColor: theme.colors.mintCream,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
+  },
+  taskContsiner: {
+    width: Dimensions.get('screen').width * 0.85,
+    paddingHorizontal: 10,
   },
   title: {color: theme.colors.font, fontSize: 20, fontWeight: '500'},
   subTitle: {

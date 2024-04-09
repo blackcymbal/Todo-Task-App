@@ -1,5 +1,5 @@
-import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
-import React, {useEffect, useContext} from 'react';
+import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import React, {useContext} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import auth from '@react-native-firebase/auth';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -9,7 +9,6 @@ import {ToDoContext} from '../contexts/ToDoContext';
 const SocialLogin = () => {
   const navigation = useNavigation();
   const {setUser} = useContext(ToDoContext);
-
 
   async function onGoogleButtonPress() {
     try {

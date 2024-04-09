@@ -20,7 +20,6 @@ const LogoutButton = () => {
       resetToDos();
       navigation.navigate('LoginScreen');
     } catch (e) {
-      // remove error
       alert(e);
     }
   };

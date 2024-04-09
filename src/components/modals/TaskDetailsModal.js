@@ -5,8 +5,6 @@ import {
   Modal,
   TouchableWithoutFeedback,
   Dimensions,
-  TextInput,
-  TouchableOpacity,
 } from 'react-native';
 import React from 'react';
 import theme from '../../assets/themes/theme';
@@ -23,17 +21,14 @@ const TaskDetailsModal = ({showModal, setShowModal, data}) => {
           <TouchableWithoutFeedback onPress={() => false}>
             <View style={styles.innerContainer}>
               <Text style={styles.title}>Task Details</Text>
-              <View
-                style={{
-                  width: Dimensions.get('screen').width * 0.85,
-                  paddingHorizontal: 15,
-                  paddingBottom: 10
-                }}>
+              <View style={styles.detailContainer}>
                 <Text style={styles.subTitle}>Task Title: {data?.name}</Text>
                 <Text style={styles.subTitle}>Task Description:</Text>
                 <Text style={styles.description}>{data?.description}</Text>
                 <Text style={styles.subTitle}>Created At: {data?.date}</Text>
-                <Text style={styles.subTitle}>Status: {data?.doneStatus ? 'Completed': 'Not Completed'}</Text>
+                <Text style={styles.subTitle}>
+                  Status: {data?.doneStatus ? 'Completed' : 'Not Completed'}
+                </Text>
               </View>
             </View>
           </TouchableWithoutFeedback>
@@ -53,12 +48,16 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.35)',
   },
   innerContainer: {
-    //  height: Dimensions.get('screen').height * 0.6,
     width: Dimensions.get('screen').width * 0.85,
     backgroundColor: theme.colors.mintCream,
     alignItems: 'center',
     padding: 10,
     borderRadius: 10,
+  },
+  detailContainer: {
+    width: Dimensions.get('screen').width * 0.85,
+    paddingHorizontal: 20,
+    paddingBottom: 10,
   },
   title: {color: theme.colors.font, fontSize: 20, fontWeight: '500'},
   subTitle: {
@@ -72,6 +71,5 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '400',
     marginTop: 2,
-
-  }
+  },
 });

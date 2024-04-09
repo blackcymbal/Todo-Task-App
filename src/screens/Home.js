@@ -1,17 +1,15 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-import React, {useContext, useEffect} from 'react';
+import {StyleSheet, View} from 'react-native';
+import React, {useContext} from 'react';
 import AppBar from '../components/AppBar';
 import ToDoList from '../components/ToDoList';
 import theme from '../assets/themes/theme';
 import {ToDoContext} from '../contexts/ToDoContext';
 import {useFocusEffect} from '@react-navigation/native';
 
-const Home = ({navigation}) => {
+const Home = () => {
   const {getTodosFromFireStore} = useContext(ToDoContext);
 
-  // useEffect(()=>{
-  //   getTodosFromFireStore()
-  // }, [])
+
 
   useFocusEffect(
     React.useCallback(() => {

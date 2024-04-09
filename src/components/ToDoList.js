@@ -6,7 +6,7 @@ import EachTodo from './EachTodo';
 import TaskDetailsModal from './modals/TaskDetailsModal';
 
 const ToDoList = () => {
-  const {toDos, updateTodo, countDone, removeToDo} = useContext(ToDoContext);
+  const {toDos, countDone} = useContext(ToDoContext);
   const [data, setData] = useState({});
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -36,7 +36,12 @@ const ToDoList = () => {
 export default ToDoList;
 
 const styles = StyleSheet.create({
-  container: {backgroundColor: theme.colors.mintCream, paddingHorizontal: 10},
+  container: {
+    flex: 1,
+    backgroundColor: theme.colors.mintCream,
+    paddingHorizontal: 10,
+    paddingBottom: 10,
+  },
   totalView: {
     flexDirection: 'row',
     alignItems: 'center',
