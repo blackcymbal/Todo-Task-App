@@ -19,11 +19,16 @@ const ToDoList = () => {
         <Text style={styles.totalText}>Total Completed Tasks:</Text>
         <Text style={styles.totalText}>{countDone}</Text>
       </View>
-      <FlatList
-        data={toDos}
-        renderItem={renderItem}
-        keyExtractor={item => item.id.toString()}
-      />
+      {toDos?.length == 0 ? (
+        <Text style={{fontSize: 20, fontWeight: '500', color: theme.colors.font, paddingVertical: 100, paddingHorizontal: 10, textAlign: 'center'}}>No tasks added, please go to task screen to add new tasks</Text>
+      ) : (
+        <FlatList
+          data={toDos}
+          renderItem={renderItem}
+          keyExtractor={item => item.id.toString()}
+        />
+      )}
+
       <TaskDetailsModal
         showModal={modalOpen}
         setShowModal={setModalOpen}

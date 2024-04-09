@@ -9,7 +9,7 @@ const EachTodo = ({item, setData, setModalOpen}) => {
 
   useEffect(() => {
     setCountDone(toDos.filter(item => item.doneStatus === true).length);
-  }, [item?.doneStatus]);
+  }, [item?.doneStatus, toDos?.length]);
 
   const handlePress = () => {
     setData(item);
